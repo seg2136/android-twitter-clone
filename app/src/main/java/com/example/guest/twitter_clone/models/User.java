@@ -3,6 +3,7 @@ package com.example.guest.twitter_clone.models;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 
 /**
  * Created by Guest on 10/28/15.
@@ -24,5 +25,12 @@ public class User extends Model {
 
     public String getName() {
         return mName;
+    }
+
+    public static User find(String username) {
+        return new Select()
+                .from(User.class)
+                .where("Name = ?", username)
+                .executeSingle();
     }
 }
