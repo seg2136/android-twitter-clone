@@ -1,5 +1,6 @@
 package com.example.guest.twitter_clone.ui;
 
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,18 +14,20 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.guest.twitter_clone.R;
+import com.example.guest.twitter_clone.adaptors.TweetAdaptor;
 import com.example.guest.twitter_clone.models.Tweet;
 import com.example.guest.twitter_clone.models.User;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ListActivity {
 
     private SharedPreferences mPreferences;
     private User mUser;
     private EditText mTweetText;
     private Button mSubmitButton;
     private ArrayList<Tweet> mTweets;
+    private TweetAdaptor mAdaptor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         mTweetText = (EditText) findViewById(R.id.newTweetEdit);
         mSubmitButton = (Button) findViewById(R.id.tweetSubmitButton);
         mTweets = (ArrayList) Tweet.all();
+
+        mAdaptor = new TweetAdaptor(this, mTweets);
+        setListAdapter(mAdaptor);
 
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
