@@ -50,6 +50,7 @@ public class MainActivity extends ListActivity {
                 Tweet tweet = new Tweet(tweetContent, mUser);
                 tweet.save();
                 mTweets.add(tweet);
+                mAdaptor.notifyDataSetChanged();
 
                 mTweetText.setText("");
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
