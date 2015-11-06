@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.guest.twitter_clone.R;
@@ -28,6 +29,7 @@ public class MainActivity extends ListActivity {
     private Button mSubmitButton;
     private ArrayList<Tweet> mTweets;
     private TweetAdaptor mAdaptor;
+    private ImageView mSearchImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +41,18 @@ public class MainActivity extends ListActivity {
         mTweetText = (EditText) findViewById(R.id.newTweetEdit);
         mSubmitButton = (Button) findViewById(R.id.tweetSubmitButton);
         mTweets = (ArrayList) Tweet.all();
+        mSearchImage = (ImageView) findViewById(R.id.searchButtonImage);
 
         mAdaptor = new TweetAdaptor(this, mTweets);
         setListAdapter(mAdaptor);
+
+        mSearchImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override

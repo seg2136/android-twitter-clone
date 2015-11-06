@@ -27,7 +27,7 @@ public class Tag extends Model {
         mTag = tag;
     }
 
-    private static Tag find(String tag) {
+    public static Tag find(String tag) {
         return new Select()
                 .from(Tag.class)
                 .where("Tag = ?", tag)
